@@ -247,18 +247,18 @@ class misp::install inherits misp {
 
   $run_php = "/usr/bin/scl enable rh-${misp::php_version}"
 
-  exec {
-    default:
-      cwd => "${misp::install_dir}/";
+  #exec {
+  #  default:
+  #    cwd => "${misp::install_dir}/";
 
-    'Pear install Console_CommandLine':
-      creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Console/CommandLine.php",
-      command => "${run_php} 'pear install ${misp::install_dir}/INSTALL/dependencies/Console_CommandLine/package.xml'";
+  #  'Pear install Console_CommandLine':
+  #    creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Console/CommandLine.php",
+  #    command => "${run_php} 'pear install ${misp::install_dir}/INSTALL/dependencies/Console_CommandLine/package.xml'";
 
-    'Pear install Crypt_GPG':
-      creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Crypt/GPG.php",
-      command => "${run_php} 'pear install ${misp::install_dir}/INSTALL/dependencies/Crypt_GPG/package.xml'";
-  }
+  #  'Pear install Crypt_GPG':
+  #    creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Crypt/GPG.php",
+  #    command => "${run_php} 'pear install ${misp::install_dir}/INSTALL/dependencies/Crypt_GPG/package.xml'";
+  #}
 
   ## CakePHP
   #
