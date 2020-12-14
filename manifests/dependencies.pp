@@ -14,7 +14,7 @@ class misp::dependencies inherits misp {
     # Redis connection from PHP
     "sclo-${misp::php_version}-php-pecl-redis4",
   ].each |String $pkg| {
-    ensure_resource('package', $pkg)
+    ensure_packages($pkg)
   }
 
   if $misp::manage_python {
