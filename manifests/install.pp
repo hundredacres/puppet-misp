@@ -265,7 +265,7 @@ class misp::install inherits misp {
 
   # Fix a bug in the CentOS packaging, apache is expected to be from rh-httpd24
   User <| title == 'apache' |> {
-    home => '/usr/share/httpd'
+    home => '/opt/rh/httpd24/root/usr/share/httpd'
   }
 
   file {
@@ -274,7 +274,7 @@ class misp::install inherits misp {
       owner  => $misp::default_user,
       group  => $misp::default_group;
 
-    '/usr/share/httpd/.composer':;
+    '/opt/rh/httpd24/root/usr/share/httpd/.composer':;
     "${misp::install_dir}/app/Plugin/CakeResque":;
     "${misp::install_dir}/app/cache":
       seltype => 'httpd_sys_rw_content_t';
