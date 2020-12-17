@@ -177,7 +177,7 @@ class misp::install inherits misp {
         require => Vcsrepo["${misp::install_dir}/app/files/scripts/lief"];
 
       'Set up LIEF build':
-        command   => '/usr/bin/scl enable devtoolset-7 rh-python36 "bash -c \'cmake3 -DLIEF_PYTHON_API=ON -DLIEF_DOC=OFF -DLIEF_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DPYTHON_VERSION=3.6 ..\'"',
+        command   => '/usr/bin/scl enable devtoolset-7 rh-python36 "bash -c \'cmake3 -DLIEF_PYTHON_API=ON -DLIEF_DOC=OFF -DLIEF_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DPYTHON_VERSION=3.6 -DPYTHON_EXECUTABLE=${misp::install_dir}/venv/bin/python ..\'"',
         creates   => "${misp::install_dir}/app/files/scripts/lief/build/CMakeCache.txt",
         require   => Exec['Ensure LIEF build dir'],
         subscribe => Vcsrepo["${misp::install_dir}/app/files/scripts/lief"];
@@ -195,7 +195,7 @@ class misp::install inherits misp {
         notify  => Exec['Install LIEF'];
 
       'Install LIEF':
-        cwd       => "${misp::install_dir}/app/files/scripts/lief/build/api/python",
+        cwd       => "${misp::install_dir}/app/files/scripts/lief/build/api/python/lief_pybind11-prefix/src/lief_pybind11",
         path      => $pip_path,
         command   => 'python3 setup.py install',
         unless    => 'pip freeze --all | /bin/grep lief=',
